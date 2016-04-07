@@ -1,2 +1,7 @@
 Django==1.9.5
 django-angular==0.8.1
+django-compressor==2.0
+gunicorn==19.4.5
+whitenoise==2.0.6
+BeautifulSoup==3.2.1
+psycopg2==2.6.1

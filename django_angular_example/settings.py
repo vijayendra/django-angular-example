@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djng', ## django-angular
+    'compressor',
     'accounts',
 ]
 
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'django_angular_example.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,3 +122,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# A list of locations of additional static files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    ]
+
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
+]
+
+COMPRESS_ENABLED = False #os.environ.get('COMPRESS_ENABLED', False) ##FIXME
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
