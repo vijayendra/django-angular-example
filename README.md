@@ -1,0 +1,1 @@
+This is a django angular example using `django-angular` package without REST apis
