@@ -1,5 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from django.contrib.auth import views as auth_views
+
+from .forms import AuthenticationForm
+
 def login(request):
-    return HttpResponse("<h1>Hello World</h1>")
+    template_name = "accounts/login.html"
+    return auth_views.login(request, template_name, AuthenticationForm)
+    
