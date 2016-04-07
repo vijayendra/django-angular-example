@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djng', ## django-angular
+    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
