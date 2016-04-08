@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 <!DOCTYPE html>
-<html>
+<html ng-app="djng-demo">
   <head>
     <meta charset="utf-8">
     <title>Django Angular Example</title>
@@ -13,6 +13,8 @@
     {% compress css %}
     <link rel="stylesheet" type="text/css" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}" />
+	<link href="{% static 'djng/css/styles.css' %}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'djng/css/bootstrap3.css' %}" rel="stylesheet" type="text/css" />
     {% endcompress %}
 
   </head>
@@ -63,6 +65,18 @@
     <script type="text/javascript" src="{% static 'bower_components/angular-cookies/angular-cookies.min.js' %}"></script>
 
     {% endcompress %}
+
+	{% block scripts %}{% endblock %}
+
+	<script type="text/javascript">
+	{% block ng_module_definition %}
+		var my_app = angular.module("djng-demo", {% block ng_module_dependencies %}[]{% endblock ng_module_dependencies %});
+	{% endblock %}
+	</script>
+	
+	{% block demo_scripts %}
+
+	{% endblock %}
     
   </body>
 </html>
