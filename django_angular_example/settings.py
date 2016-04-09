@@ -143,3 +143,4 @@ STATICFILES_FINDERS = [
 COMPRESS_ENABLED = False #os.environ.get('COMPRESS_ENABLED', False) ##FIXME
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
