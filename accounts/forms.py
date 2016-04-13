@@ -49,7 +49,7 @@ class MyUserCreationForm(NgFormValidationMixin, Bootstrap3ModelForm):
             user.save()
         return user
 
-class MyAuthenticationForm(forms.Form):
+class MyAuthenticationForm(NgFormValidationMixin, Bootstrap3Form):
     """
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
