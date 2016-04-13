@@ -10,19 +10,18 @@ class MyUserManager(BaseUserManager):
     """
     This is my users object manager
     """
-    def create_user(self, email, date_of_birth, password=None):
+    def create_user(self, email, password=None):
         if not email:
             raise ValueError('User must have email address')
         user = self.model(
             email = self.normalize_email(email),
-            date_of_birth = date_of_birth,
             )
         user.set_password(password)
         user.save(using=self.db)
         return user
 
-    def create_superuser(self, email, date_of_birth, password=None):
-        user = self.create_user(email, date_of_birth, password)
+    def create_superuser(self, email, password=None):
+        user = self.create_user(email, password)
         user.is_admin = True
         user.save(using=self.db)
         return user
@@ -35,7 +34,6 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         )
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=30, blank=True)
-    date_of_birth = models.DateField(_('date of birth'))
     is_staff = models.BooleanField(
         _('staff status'),
         default=False,
@@ -54,7 +52,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     objects = MyUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['date_of_birth']
+    REQUIRED_FIELDS = []
 
     class Meta:
         verbose_name = _('user')

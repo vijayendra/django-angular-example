@@ -9,7 +9,7 @@ from .forms import MyUserCreationForm
 from .models import MyUser
 
 class RegisterView(CreateView):
-    template_name = 'registration/register.html'
+    template_name = 'accounts/register.html'
     form_class = MyUserCreationForm
     success_url = reverse_lazy('form_data_valid')
 

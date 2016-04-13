@@ -9,6 +9,13 @@ app_name = 'user'
 urlpatterns = [
     url(r'^$', UserList.as_view(), name='list'),
     url(r'^(?P<pk>\d+)/$', UserDetail.as_view(), name='detail'),
-    url(r'^login/$', auth_views.login, {'authentication_form': MyAuthenticationForm}, name='login'),
+    url(r'^login/$', auth_views.login,
+        {'template_name': 'accounts/login.html',
+         'authentication_form': MyAuthenticationForm,
+         }, name='login'),
+    url(r'^logout/$', auth_views.logout,
+        {'template_name': 'accounts/logged_out.html',
+         'authentication_form': MyAuthenticationForm,
+         }, name='logout'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
 ]

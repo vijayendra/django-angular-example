@@ -6,10 +6,12 @@ from django.contrib.auth import (
 )
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.utils.text import capfirst
+from djng.styling.bootstrap3.forms import Bootstrap3Form, Bootstrap3ModelForm
+from djng.forms import NgFormValidationMixin, NgModelFormMixin, NgModelForm
 
 from .models import MyUser
 
-class MyUserCreationForm(forms.ModelForm):
+class MyUserCreationForm(NgFormValidationMixin, Bootstrap3ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
     password.
@@ -25,11 +27,9 @@ class MyUserCreationForm(forms.ModelForm):
         strip=False,
         help_text=_("Enter the same password as before, for verification."))
 
-    date_of_birth = forms.DateField(widget=forms.SelectDateWidget())
-
     class Meta:
         model = MyUser
-        fields = ('email', 'first_name', 'last_name', 'date_of_birth')
+        fields = ('email', )
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")

@@ -1,0 +1,41 @@
+{% extends "accounts/base.html" %}
+
+
+{% block form_title %}Register{% endblock %}
+
+{% block form_header %}Please fill this to register.{% endblock %}
+
+{% block form_submission %}
+<button type="submit" class="btn btn-primary">Submit</button>
+{% endblock %}
+
+
+{% comment %}
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'user:register' %}">
+{% csrf_token %}
+{{ form.as_div }}
+<input type="submit" value="register" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock content %}
+
+{% endcomment %}
