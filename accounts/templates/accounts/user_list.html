@@ -1,0 +1,11 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+    <h2>Users</h2>
+    <ul>
+        {% for user in object_list %}
+            <li><a href="{% url 'user:detail' user.pk %}">{{ user.get_full_name }}</a> | {{ user.email|urlize }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
+

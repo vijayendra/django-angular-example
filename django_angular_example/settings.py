@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djng', ## django-angular
     'compressor',
+    'accounts',
     'testapp',
 ]
 
@@ -143,4 +144,11 @@ STATICFILES_FINDERS = [
 COMPRESS_ENABLED = False #os.environ.get('COMPRESS_ENABLED', False) ##FIXME
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+AUTH_USER_MODEL = 'accounts.MyUser'
+LOGIN_REDIRECT_URL = '/'
+
+LOGIN_URL = '/users/login/'
+LOGOUT_URL = '/users/logout/'
+
 

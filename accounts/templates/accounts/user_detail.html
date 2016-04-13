@@ -1,0 +1,13 @@
+{% extends "accounts/base.html" %}
+
+{% block content %}
+    <h2>{{ user.get_full_name }}</h2>
+    <ul>
+      <li>Name: <a href="{% url 'user:detail' user.pk %}">{{ user.get_full_name }}</a></li>
+      <li>Email: {{ user.email|urlize }}</li>
+      <li>Date of birth: {{ user.date_of_birth }}</li>
+      <li>Is staff: {{ user.is_staff }}</li>
+      <li>Is active: {{ user.is_active }}</li>
+    </ul>
+{% endblock content %}
+
