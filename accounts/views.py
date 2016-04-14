@@ -12,7 +12,7 @@ from .models import MyUser
 class RegisterView(CreateView):
     template_name = 'accounts/register.html'
     form_class = MyUserCreationForm
-    success_url = reverse_lazy('form_data_valid')
+    success_url = reverse_lazy('thankyou')
 
     def post(self, request, **kwargs):
         print "Received post request"
@@ -23,6 +23,11 @@ class RegisterView(CreateView):
     def ajax(self, request):
         print "Received ajax request"
         form = self.form_class(data=json.loads(request.body))
+        if form.is_valid():
+            user = form.save()
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+            
         response_data = {'errors': form.errors, 'success_url': force_text(self.success_url)}
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 

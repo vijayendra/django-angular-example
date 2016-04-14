@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'djng', ## django-angular
     'compressor',
     'accounts',
-    'testapp',
 ]
 
 MIDDLEWARE_CLASSES = [
