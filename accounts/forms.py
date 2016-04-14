@@ -11,11 +11,14 @@ from djng.forms import NgFormValidationMixin, NgModelFormMixin, NgModelForm
 
 from .models import MyUser
 
-class MyUserCreationForm(NgFormValidationMixin, Bootstrap3ModelForm):
+class MyUserCreationForm(NgModelFormMixin, NgFormValidationMixin, Bootstrap3ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
     password.
     """
+    scope_prefix = 'user_data'
+    form_name = 'user_creation_form'
+
     error_messages = {
         'password_mismatch': _("The two password fields didn't match."),
     }
@@ -49,11 +52,14 @@ class MyUserCreationForm(NgFormValidationMixin, Bootstrap3ModelForm):
             user.save()
         return user
 
-class MyAuthenticationForm(NgFormValidationMixin, Bootstrap3Form):
+class MyAuthenticationForm(NgModelFormMixin, NgFormValidationMixin, Bootstrap3Form):
     """
     Base class for authenticating users. Extend this to get a form that accepts
     username/password logins.
     """
+    scope_prefix = 'auth_data'
+    form_name = 'login_form'
+
     email = forms.EmailField(label=_("Email address"), max_length=254, required=True)
     password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput)
 

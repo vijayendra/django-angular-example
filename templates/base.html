@@ -71,14 +71,22 @@
     <script type="text/javascript" src="{% static 'bower_components/angular/angular.js' %}"></script>
     <script type="text/javascript" src="{% static 'bower_components/angular-route/angular-route.js' %}"></script>
     <script type="text/javascript" src="{% static 'bower_components/angular-cookies/angular-cookies.min.js' %}"></script>
-
+    <script src="{% static 'djng/js/django-angular.js' %}" type="text/javascript"></script>
+    
     {% endcompress %}
 
 	{% block scripts %}{% endblock %}
 
 	<script type="text/javascript">
 	{% block ng_module_definition %}
-		var my_app = angular.module("djng-demo", {% block ng_module_dependencies %}[]{% endblock ng_module_dependencies %});
+		var my_app = angular.module("djng-demo", ["djng.forms"]);
+        my_app.config(csrfConfig);
+        csrfConfig.$inject = ["$httpProvider"];
+        function csrfConfig($httpProvider){
+           $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+           $httpProvider.defaults.xsrfCookieName = "csrftoken";
+           $httpProvider.defaults.xsrfHeaderName = "X-CSRFToken";
+        }
 	{% endblock %}
 	</script>
 	
