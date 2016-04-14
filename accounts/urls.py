@@ -15,7 +15,6 @@ urlpatterns = [
          }, name='login'),
     url(r'^logout/$', auth_views.logout,
         {'template_name': 'accounts/logged_out.html',
-         'authentication_form': MyAuthenticationForm,
          }, name='logout'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
 ]
